@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+
 import { HStack, IconButton, VStack, useTheme, Text, Heading, FlatList, Center } from 'native-base';
 import { ChatTeardropText, SignOut } from 'phosphor-react-native';
 
@@ -9,23 +11,26 @@ import { Button } from '../components/Button';
 
 export function Home() {
   const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open');
-  // const [orders, setOrders] = useState<OrderProps[]>([
-  //   {
-  //     id: '123',
-  //     patrimony: '234545232345',
-  //     when: '18/07/2022 às 10:00',
-  //     status: 'open',
-  //   },
-  //   {
-  //     id: '2342345',
-  //     patrimony: '345667565',
-  //     when: '17/04/2021 às 19:00',
-  //     status: 'closed',
-  //   },
-  // ]);
-  const [orders, setOrders] = useState<OrderProps[]>([]);
+  const [orders, setOrders] = useState<OrderProps[]>([
+    {
+      id: '343456',
+      patrimony: '23232',
+      status: 'open',
+      when: '12/08/2022 às 14:00',
+    }
+  ]);
+  
+  const navigation = useNavigation();
 
   const { colors } = useTheme();
+
+  function handleNewOrder() {
+    navigation.navigate('new');
+  }
+  
+  function handleOpenDetails(orderId: string) {
+    navigation.navigate('details', { orderId });
+  }
 
   return (
     <VStack flex={1} pb={6} bg="gray.700">
@@ -82,7 +87,7 @@ export function Home() {
           data={orders}
           keyExtractor={(order) => order.id}
           renderItem={({ item }) => (
-            <Order key={item.id} data={item} />
+            <Order key={item.id} data={item} onPress={() => handleOpenDetails(item.id)} />
           )}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 20 }}
@@ -97,7 +102,7 @@ export function Home() {
           )}
         />
 
-        <Button title="Nova solicitação" mt={5} />
+        <Button title="Nova solicitação" mt={5} onPress={handleNewOrder} />
       </VStack>
     </VStack>
   );
