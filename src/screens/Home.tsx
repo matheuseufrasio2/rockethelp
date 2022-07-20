@@ -97,7 +97,7 @@ export function Home() {
           )}
         />
 
-        <Button title="Nova solicitação" />
+        <Button title="Nova solicitação" mt={5} />
       </VStack>
     </VStack>
   );
