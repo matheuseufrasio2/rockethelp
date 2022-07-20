@@ -7,7 +7,7 @@ import { OrderProps } from '../components/Order';
 import { OrderFirestoreDTO } from '../dtos/OrderFirestoreDTO';
 import { dateFormat } from '../utils/firestoreDateFormat';
 import { Loading } from '../components/Loading';
-import { CircleWavyCheck, Hourglass, DesktopTower, Clipboard } from 'phosphor-react-native';
+import { CircleWavyCheck, Hourglass, DesktopTower, ClipboardText } from 'phosphor-react-native';
 import { CardDetails } from '../components/CardDetails';
 import { Input } from '../components/Input';
 import { Button } from '../components/Button';
@@ -111,13 +111,13 @@ export function Details() {
             title="Equipamento"
             description={`Patrimônio ${order.patrimony}`}
             icon={DesktopTower}
-            footer={order.when}
-          />
+            />
 
           <CardDetails
             title="Descrição do Problema"
             description={order.description}
-            icon={Clipboard}
+            icon={ClipboardText}
+            footer={`Registrado em ${order.when}`}
           />
 
           <CardDetails
